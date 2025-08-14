@@ -5,7 +5,7 @@ import Sidebar from "../component/Sidebar";
 import logo from "../assets/Icon.png";
 import profilePic from "../assets/Vector1.png";
 
-export default function MyList() {
+function MyList() {
   const [myList, setMyList] = useState([]);
   const navigate = useNavigate();
   const theme = useTheme();
@@ -24,12 +24,15 @@ export default function MyList() {
     localStorage.setItem("myList", JSON.stringify(updatedList));
   };
 
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const userProfilePic = storedUser?.profileImage || profilePic;
+
   return (
     <div style={{ display: "flex" }}>
       {/* Sidebar kiri */}
       <Sidebar
         logoSrc={logo}
-        profileSrc={profilePic}
+        profileSrc={userProfilePic}
         onProfileClick={() => console.log("Profile clicked")}
         onMyListClick={() => navigate("/my-list")}
         onLogoutClick={() => console.log("Logout clicked")}
@@ -91,7 +94,16 @@ export default function MyList() {
                   <Button
                     variant="outlined"
                     color="error"
-                    sx={{ m: 1 }}
+                    sx={{
+                      m: 1,
+                      borderColor: 'red',
+                      color: 'red',
+                      '&:hover': {
+                        backgroundColor: 'red',
+                        color: 'white',
+                        borderColor: 'red',
+                      },
+                    }}
                     onClick={() => handleRemove(book.id)}
                   >
                     Remove
@@ -105,3 +117,6 @@ export default function MyList() {
     </div>
   );
 }
+
+
+export default MyList;

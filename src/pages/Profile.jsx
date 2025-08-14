@@ -5,7 +5,7 @@ import Sidebar from "../component/Sidebar";
 import logo from "../assets/Icon.png";
 import profilePic from "../assets/Vector1.png";
 
-export default function Profile() {
+function Profile() {
   const storedUser = JSON.parse(localStorage.getItem("user")) || {};
   const [name, setName] = useState(storedUser.name || "User Name");
   const [email, setEmail] = useState(storedUser.email || "user@example.com");
@@ -46,7 +46,6 @@ export default function Profile() {
           flexGrow: 1,
           ml: { xs: 0, sm: "240px" },
           mt: { xs: "60px", sm: 0 },
-          backgroundColor: "aquamarine",
           height: "100vh",
           display: "flex", // 🔹 Flexbox untuk posisi tengah
           justifyContent: "center", // 🔹 Horizontal center
@@ -100,3 +99,5 @@ export default function Profile() {
     </Box>
   );
 }
+
+export default Profile;

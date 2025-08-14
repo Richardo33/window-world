@@ -20,7 +20,7 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 
-const Sidebar = ({ logoSrc, profileSrc, onLogoutClick }) => {
+function Sidebar ({ logoSrc, profileSrc }){
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
@@ -28,6 +28,14 @@ const Sidebar = ({ logoSrc, profileSrc, onLogoutClick }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleMenuClose = () => setAnchorEl(null);
+
+    const handleLogout = () => {
+    // Hapus data user dari localStorage
+    localStorage.removeItem("loggedInUser");
+
+    // Redirect ke halaman login / landing
+    navigate("/");
+  };
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -104,7 +112,7 @@ const Sidebar = ({ logoSrc, profileSrc, onLogoutClick }) => {
             <Divider />
             <MenuItem
               onClick={() => {
-                onLogoutClick();
+                handleLogout();
                 handleMenuClose();
               }}
             >
@@ -197,7 +205,7 @@ const Sidebar = ({ logoSrc, profileSrc, onLogoutClick }) => {
         <Divider sx={{ my: 1 }} />
 
         <Tooltip title="Logout" placement="right">
-          <ListItemButton onClick={onLogoutClick}>
+          <ListItemButton onClick={handleLogout}>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>

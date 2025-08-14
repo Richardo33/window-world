@@ -6,15 +6,18 @@ import { useMediaQuery, useTheme, Typography } from "@mui/material";
 import CardBook from "../component/CardBook";
 import ListBook from "../component/ListBook";
 
-export default function Home() {
+function Home() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const userProfilePic = storedUser?.profileImage || profilePic;
 
   return (
     <div style={{ display: "flex" }}>
       <Sidebar
         logoSrc={logo}
-        profileSrc={profilePic}
+        profileSrc={userProfilePic}
         onProfileClick={() => console.log("Profile clicked")}
         onMyListClick={() => console.log("My List clicked")}
         onLogoutClick={() => console.log("Logout clicked")}
@@ -33,3 +36,6 @@ export default function Home() {
     </div>
   );
 }
+
+
+export default Home;

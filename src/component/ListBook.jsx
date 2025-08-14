@@ -3,7 +3,7 @@ import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { dummyBooks } from "./dummy/dummyBooks";
 
-export default function ListBook() {
+function ListBook() {
   const navigate = useNavigate();
 
   return (
@@ -89,3 +89,5 @@ export default function ListBook() {
     </Grid>
   );
 }
+
+export default ListBook;

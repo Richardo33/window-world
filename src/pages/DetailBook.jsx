@@ -7,7 +7,10 @@ import { dummyBooks } from "../component/dummy/dummyBooks";
 import Sidebar from "../component/Sidebar"; 
 import logo from "../assets/Icon.png";
 import profilePic from "../assets/Vector1.png";
-export default function DetailBook() {
+
+
+
+function DetailBook() {
   const { id } = useParams();
   const theme = useTheme();
   const book = dummyBooks.find((b) => b.id === parseInt(id)) || dummyBooks[0];
@@ -152,3 +155,5 @@ export default function DetailBook() {
     </Box>
   );
 }
+
+export default DetailBook;

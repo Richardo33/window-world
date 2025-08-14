@@ -8,7 +8,6 @@ import Home from "./pages/home";
 import DetailBook from "./pages/DetailBook";
 import MyList from "./pages/MyList";
 import Profile from "./pages/Profile";
-import Sidebar from "./component/Sidebar";
 
 function App() {
   return (
@@ -16,21 +15,11 @@ function App() {
       <CssBaseline />
       <Router>
         <Routes>
-          {/* Halaman Landing */}
           <Route path="/" element={<Landing />} />
-
-          {/* Halaman dengan Sidebar */}
           <Route path="/home" element={<Home />} />
-
           <Route path="/detail/:id" element={<DetailBook />}/>
-          <Route
-            path="/my-list"
-            element={<MyList /> }/>
-
-          <Route
-            path="/profile"
-            element={<Profile /> }
-          />
+          <Route path="/my-list" element={<MyList /> }/>
+          <Route path="/profile" element={<Profile /> }/>
         </Routes>
       </Router>
     </>

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../component/Sidebar"; 
 import logo from "../assets/Icon.png";
 import profilePic from "../assets/Vector1.png";
+import Swal from "sweetalert2";
 
 function MyList() {
   const [myList, setMyList] = useState([]);
@@ -19,10 +20,32 @@ function MyList() {
 
   // Hapus buku dari my list
   const handleRemove = (id) => {
-    const updatedList = myList.filter((book) => book.id !== id);
-    setMyList(updatedList);
-    localStorage.setItem("myList", JSON.stringify(updatedList));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This book will be removed from your list.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, remove it",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const updatedList = myList.filter((book) => book.id !== id);
+        setMyList(updatedList);
+        localStorage.setItem("myList", JSON.stringify(updatedList));
+
+        Swal.fire({
+          icon: "success",
+          title: "Removed!",
+          text: "The book has been removed from your list.",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      }
+    });
   };
+
 
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const userProfilePic = storedUser?.profileImage || profilePic;
@@ -68,6 +91,7 @@ function MyList() {
                     display: "flex",
                     flexDirection: "column",
                     overflow: "hidden",
+                    // backgroundColor: "aquamarine",
                     transition: "transform 0.3s ease, box-shadow 0.3s ease",
                     cursor: "pointer",
                     "&:hover": {
@@ -75,12 +99,13 @@ function MyList() {
                       boxShadow: "0px 8px 20px rgba(0,0,0,0.2)",
                     },
                   }}
+                  
                 >
                   <CardMedia
                     component="img"
                     image={book.cover}
                     alt={book.title}
-                    sx={{ height: 180, objectFit: "cover" }}
+                    sx={{ height: 180, objectFit: "cover"}}
                     onClick={() => navigate(`/detail/${book.id}`)}
                   />
                   <CardContent sx={{ flex: 1 }}>

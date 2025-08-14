@@ -7,6 +7,7 @@ import { dummyBooks } from "../component/dummy/dummyBooks";
 import Sidebar from "../component/Sidebar"; 
 import logo from "../assets/Icon.png";
 import profilePic from "../assets/Vector1.png";
+import Swal from "sweetalert2";
 
 
 
@@ -14,6 +15,31 @@ function DetailBook() {
   const { id } = useParams();
   const theme = useTheme();
   const book = dummyBooks.find((b) => b.id === parseInt(id)) || dummyBooks[0];
+
+  const handleAddMyList = (book) => {
+    const storedList = JSON.parse(localStorage.getItem("myList")) || [];
+
+    if (!storedList.find((b) => b.id === book.id)) {
+      storedList.push(book);
+      localStorage.setItem("myList", JSON.stringify(storedList));
+
+      Swal.fire({
+        icon: "success",
+        title: "Added!",
+        text: `${book.title} has been added to My List`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } else {
+      Swal.fire({
+        icon: "info",
+        title: "Already Added",
+        text: `${book.title} is already in My List`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -118,16 +144,7 @@ function DetailBook() {
                 color="secondary"
                 startIcon={<Favorite />}
                 fullWidth
-                onClick={() => {
-                  const storedList = JSON.parse(localStorage.getItem("myList")) || [];
-                  if (!storedList.find((b) => b.id === book.id)) {
-                    storedList.push(book);
-                    localStorage.setItem("myList", JSON.stringify(storedList));
-                    alert(`${book.title} has been added to My List`);
-                  } else {
-                    alert(`${book.title} is already in My List`);
-                  }
-                }}
+                onClick={() =>  handleAddMyList(book)}
               >
                 Add My List
               </Button>

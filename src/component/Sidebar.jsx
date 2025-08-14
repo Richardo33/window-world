@@ -19,6 +19,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 function Sidebar ({ logoSrc, profileSrc }){
   const theme = useTheme();
@@ -29,13 +31,36 @@ function Sidebar ({ logoSrc, profileSrc }){
   const open = Boolean(anchorEl);
   const handleMenuClose = () => setAnchorEl(null);
 
-    const handleLogout = () => {
-    // Hapus data user dari localStorage
-    localStorage.removeItem("loggedInUser");
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out of your account.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Hapus data user dari localStorage
+        localStorage.removeItem("loggedInUser");
+        localStorage.removeItem("user");
 
-    // Redirect ke halaman login / landing
-    navigate("/");
+        Swal.fire({
+          title: "Logged out!",
+          text: "You have been successfully logged out.",
+          icon: "success",
+          timer: 1500,
+          showConfirmButton: false
+        });
+
+        // Redirect ke halaman login / landing
+        navigate("/");
+      }
+    });
   };
+
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -160,9 +185,19 @@ function Sidebar ({ logoSrc, profileSrc }){
         }}
         onClick={() => navigate("/profile")}
       />
-      <Typography variant="subtitle1" sx={{ mb: 4, fontWeight: "bold" }}>
+      <Typography
+        variant="subtitle1"
+        noWrap
+        sx={{
+          mb: 4,
+          fontWeight: "bold",
+          maxWidth: "180px", 
+          textAlign: "center",
+        }}
+      >
         {user ? user.name : "Guest"}
       </Typography>
+
 
       {/* Menu */}
       <List

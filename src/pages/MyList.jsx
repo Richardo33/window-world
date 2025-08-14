@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, Card, CardMedia, CardContent, Typography, Button, useTheme, useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../component/Sidebar"; 
-import logo from "../assets/Icon.png";
+import logo from "../assets/IconItalic.png";
 import profilePic from "../assets/Vector1.png";
 import Swal from "sweetalert2";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "../component/Sidebar";
-import logo from "../assets/Icon.png";
+import logo from "../assets/IconItalic.png";
 import profilePic from "../assets/Vector1.png";
 import { useMediaQuery, useTheme, Typography } from "@mui/material";
 import CardBook from "../component/CardBook";

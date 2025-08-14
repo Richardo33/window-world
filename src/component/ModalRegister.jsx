@@ -32,7 +32,7 @@ function ModalRegister({ open, onClose, onSwitchToLogin }) {
           </Button>
 
           <Typography variant="body2" textAlign="center">
-            Sudah punya akun?{' '}
+            Already have an account?{' '}
             <Link
               component="button"
               variant="body2"
@@ -43,7 +43,7 @@ function ModalRegister({ open, onClose, onSwitchToLogin }) {
               }}
               sx={{ color: '#FE4E30', fontWeight: 'bold' }}
             >
-              Login di sini
+              Login here
             </Link>
           </Typography>
         </Box>

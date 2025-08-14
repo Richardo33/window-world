@@ -5,7 +5,7 @@ import { Card, CardMedia, CardContent, Typography, Button, Box } from "@mui/mate
 import { Favorite, MenuBook } from "@mui/icons-material";
 import { dummyBooks } from "../component/dummy/dummyBooks";
 import Sidebar from "../component/Sidebar"; 
-import logo from "../assets/Icon.png";
+import logo from "../assets/IconItalic.png";
 import profilePic from "../assets/Vector1.png";
 import Swal from "sweetalert2";
 
@@ -41,12 +41,15 @@ function DetailBook() {
     }
   };
 
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      const userProfilePic = storedUser?.profileImage || profilePic;
+
   return (
     <Box sx={{ display: "flex" }}>
       {/* ✅ Sidebar */}
       <Sidebar
         logoSrc={logo}
-        profileSrc={profilePic}
+        profileSrc={userProfilePic}
         onProfileClick={() => console.log("Profile clicked")}
         onMyListClick={() => console.log("My List clicked")}
         onLogoutClick={() => console.log("Logout clicked")}

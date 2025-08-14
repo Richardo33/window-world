@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 import { Box, Typography, Avatar, TextField, Button, Paper } from "@mui/material";
 import Sidebar from "../component/Sidebar"; 
-import logo from "../assets/Icon.png";
+import logo from "../assets/IconItalic.png";
 import profilePic from "../assets/Vector1.png";
+import Swal from "sweetalert2";
+
 
 function Profile() {
   const storedUser = JSON.parse(localStorage.getItem("user")) || {};
@@ -25,8 +27,17 @@ function Profile() {
   const handleSave = () => {
     const updatedUser = { name, email, profileImage };
     localStorage.setItem("user", JSON.stringify(updatedUser));
-    alert("Profile updated successfully!");
+
+    Swal.fire({
+      icon: "success",
+      title: "Profile Updated",
+      text: "Your profile has been updated successfully!",
+      showConfirmButton: false,
+      timer: 3000, 
+      timerProgressBar: true,
+    });
   };
+
 
   return (
     <Box sx={{ display: "flex", height: "100vh" }}>

@@ -81,7 +81,7 @@ function ModalLogin({ open, onClose, onSwitchToRegister }) {
           </Button>
 
           <Typography variant="body2" textAlign="center">
-            Belum punya akun?{' '}
+            Don’t have an account?{' '}
             <Link
               component="button"
               underline="hover"
@@ -91,13 +91,13 @@ function ModalLogin({ open, onClose, onSwitchToRegister }) {
               }}
               sx={{ color: '#FE4E30', fontWeight: 'bold' }}
             >
-              Register di sini
+              Sign up here
             </Link>
           </Typography>
 
           {/* 🔹 Info akun dummy */}
           <Typography variant="caption" color="text.secondary" textAlign="center" sx={{ mt: 1 }}>
-            Gunakan akun dummy: admin@example.com / 123456
+            Dummy account: admin@gmail.com / 123456
           </Typography>
         </Box>
       </DialogContent>

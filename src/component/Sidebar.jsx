@@ -46,15 +46,6 @@ function Sidebar ({ logoSrc, profileSrc }){
         // Hapus data user dari localStorage
         localStorage.removeItem("loggedInUser");
         localStorage.removeItem("user");
-
-        Swal.fire({
-          title: "Logged out!",
-          text: "You have been successfully logged out.",
-          icon: "success",
-          timer: 1500,
-          showConfirmButton: false
-        });
-
         // Redirect ke halaman login / landing
         navigate("/");
       }

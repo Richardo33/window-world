@@ -66,3 +66,7 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.my-swal-popup {
+  z-index: 3000 !important;
+}

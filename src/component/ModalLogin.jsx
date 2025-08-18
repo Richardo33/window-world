@@ -10,24 +10,21 @@ import {
   Link,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 
 function ModalLogin({ open, onClose, onSwitchToRegister }) {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // state untuk pesan error
 
   const handleLogin = () => {
+    // Reset error setiap submit
+    setError("");
+
     // Cek input kosong
     if (!email.trim() || !password.trim()) {
-      Swal.fire({
-        target: document.body,
-        timer: 1500,
-        icon: "warning",
-        title: "Oops...",
-        text: "Please enter both email and password!",
-      });
+      setError("Please enter both email and password!");
       return;
     }
 
@@ -49,16 +46,11 @@ function ModalLogin({ open, onClose, onSwitchToRegister }) {
         "loggedInUser",
         JSON.stringify(storedUser || dummyUser)
       );
-      // Tidak ada alert, langsung tutup modal & redirect
+      // Tutup modal & redirect
       onClose();
       navigate("/home");
     } else {
-      Swal.fire({
-        target: document.body,
-        icon: "error",
-        title: "Login Failed",
-        text: "Invalid email or password!",
-      });
+      setError("Invalid email or password!");
     }
   };
 
@@ -87,6 +79,14 @@ function ModalLogin({ open, onClose, onSwitchToRegister }) {
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="off"
           />
+
+          {/* Tampilkan error di bawah input */}
+          {error && (
+            <Typography color="error" variant="body2" sx={{ mt: -1 }}>
+              {error}
+            </Typography>
+          )}
+
           <Button
             variant="contained"
             sx={{
